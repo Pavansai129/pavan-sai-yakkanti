@@ -35,36 +35,37 @@
         "heading",
         "button"
       ],
+      "disabled": true,
       "settings": {
         "image_overlay_opacity": 40,
         "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
         "image_behavior": "none",
+        "desktop_content_position": "bottom-center",
         "desktop_content_alignment": "center",
+        "show_text_box": false,
         "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
         "show_text_below": false
       }
     },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
+        "collection": "all",
+        "products_to_show": 8,
         "title": "Featured products",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -72,13 +73,244 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 44,
         "padding_bottom": 36
+      }
+    },
+    "custom_hotspot_z3FmDq": {
+      "type": "custom-hotspot",
+      "blocks": {
+        "hotspot_B7iLzK": {
+          "type": "hotspot",
+          "settings": {
+            "image": "shopify://shop_images/black-bag-over-the-shoulder_925x_4cae5708-5e9e-4e7e-96ec-9649f0c20cd8.jpg",
+            "position_top": 50,
+            "position_left": 50,
+            "selected_product": "black-leather-bag"
+          }
+        },
+        "hotspot_txCbPz": {
+          "type": "hotspot",
+          "settings": {
+            "image": "shopify://shop_images/smiling-woman-on-snowy-afternoon_925x_bdcaf0cb-c761-46c3-a529-bd1e7849dc43.jpg",
+            "position_top": 50,
+            "position_left": 50,
+            "selected_product": "dark-winter-jacket"
+          }
+        },
+        "hotspot_WeQcp8": {
+          "type": "hotspot",
+          "settings": {
+            "image": "shopify://shop_images/mens-fall-fashion-jacket_925x_dfe6291e-8e87-4c26-8fd6-986ce67a4b0b.jpg",
+            "position_top": 50,
+            "position_left": 50,
+            "selected_product": "navy-sport-jacket"
+          }
+        },
+        "hotspot_peUAPn": {
+          "type": "hotspot",
+          "settings": {
+            "image": "shopify://shop_images/young-female-models-denim_925x_44c2cf9e-4030-4347-9d4a-f0e4a1479b4a.jpg",
+            "position_top": 50,
+            "position_left": 50,
+            "selected_product": "dark-denim-top"
+          }
+        },
+        "hotspot_GwGgfT": {
+          "type": "hotspot",
+          "settings": {
+            "image": "shopify://shop_images/leather-jacket-and-tea_925x_2490cde1-7e61-4151-9a65-de8a763bc701.jpg",
+            "position_top": 50,
+            "position_left": 50,
+            "selected_product": "classic-leather-jacket"
+          }
+        },
+        "hotspot_JGa84x": {
+          "type": "hotspot",
+          "settings": {
+            "image": "shopify://shop_images/striped-blouse-fashion_925x_1a1ff947-7950-4779-91a0-6583c619c0e5.jpg",
+            "position_top": 50,
+            "position_left": 50,
+            "selected_product": "striped-silk-blouse"
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_B7iLzK",
+        "hotspot_txCbPz",
+        "hotspot_WeQcp8",
+        "hotspot_peUAPn",
+        "hotspot_GwGgfT",
+        "hotspot_JGa84x"
+      ],
+      "disabled": true,
+      "name": "Custom Hotspot",
+      "settings": {
+        "heading": "Tisso vison in the wild",
+        "heading_color": "#000000",
+        "heading_alignment_desktop": "left",
+        "heading_alignment_mobile": "left",
+        "no_of_items_per_mobile": "2",
+        "items_per_desktop": 3,
+        "desktop_gap": 20,
+        "mobile_gap": 4,
+        "add_extra_product": true,
+        "matched_variants": "M|Black",
+        "extra_product": "blue-silk-tuxedo",
+        "padding_top_desktop": 90,
+        "padding_bottom_desktop": 90,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "custom_hero_banner_jMa3Dc": {
+      "type": "custom-hero-banner",
+      "blocks": {
+        "image_jQM3YJ": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Frame.png",
+            "hide_mobile_image": true
+          }
+        },
+        "image_with_text_C7rhya": {
+          "type": "image_with_text",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Frame_1.png",
+            "mobile_image": "shopify://shop_images/Frame_2.png",
+            "desktop_heading": "The Gift Guide",
+            "desktop_description": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+            "mobile_heading": "The Gift Guide",
+            "mobile_description": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+            "button_text": "Shop Now",
+            "button_url": "shopify://collections",
+            "show_button_on_image_mobile": true,
+            "heading_color": "#000000",
+            "description_color": "#000000",
+            "button_bg": "#000000",
+            "button_text_color": "#f5f5f5",
+            "button_icon_color": "#f5f5f5",
+            "button_bg_hover": "#fff544",
+            "button_text_hover": "#000000",
+            "button_icon_hover": "#000000"
+          }
+        },
+        "annoucement_eHd6WF": {
+          "type": "annoucement",
+          "settings": {
+            "annoucement_desktop_heading": "<p>SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL</p>",
+            "annoucement_mobile_heading": "<p>SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR</p>",
+            "annoucement_text_color": "#000000",
+            "annoucement_bg_color": "#f5f5f5"
+          }
+        }
+      },
+      "block_order": [
+        "image_jQM3YJ",
+        "image_with_text_C7rhya",
+        "annoucement_eHd6WF"
+      ],
+      "name": "Custom Hero banner",
+      "settings": {
+        "section_width": "full_width",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "custom_hotspot_TikC39": {
+      "type": "custom-hotspot",
+      "blocks": {
+        "hotspot_EhxVzm": {
+          "type": "hotspot",
+          "settings": {
+            "image": "shopify://shop_images/black-bag-over-the-shoulder_925x_4cae5708-5e9e-4e7e-96ec-9649f0c20cd8.jpg",
+            "position_top": 69,
+            "position_left": 50,
+            "selected_product": "black-leather-bag"
+          }
+        },
+        "hotspot_WrdAjX": {
+          "type": "hotspot",
+          "settings": {
+            "image": "shopify://shop_images/man-adjusts-blue-tuxedo-bowtie_925x_55a49e12-d54b-488e-b7a0-ea4c201eb01f.jpg",
+            "position_top": 57,
+            "position_left": 96,
+            "selected_product": "blue-silk-tuxedo"
+          }
+        },
+        "hotspot_qWD7wK": {
+          "type": "hotspot",
+          "settings": {
+            "image": "shopify://shop_images/red-plaid-shirt_925x_70e9e5a8-8fc5-4d60-9a9a-cc2e0dd57cc9.jpg",
+            "position_top": 29,
+            "position_left": 65,
+            "selected_product": "chequered-red-shirt"
+          }
+        },
+        "hotspot_Ea4fKP": {
+          "type": "hotspot",
+          "settings": {
+            "image": "shopify://shop_images/leather-jacket-and-tea_925x_2490cde1-7e61-4151-9a65-de8a763bc701.jpg",
+            "position_top": 24,
+            "position_left": 80,
+            "selected_product": "classic-leather-jacket"
+          }
+        },
+        "hotspot_eajX36": {
+          "type": "hotspot",
+          "settings": {
+            "image": "shopify://shop_images/casual-fashion-woman_925x_56b56608-f207-45c1-b677-bb5aa26c1c7a.jpg",
+            "position_top": 32,
+            "position_left": 50,
+            "selected_product": "classic-varsity-top"
+          }
+        },
+        "hotspot_K46qKF": {
+          "type": "hotspot",
+          "settings": {
+            "image": "shopify://shop_images/young-female-models-denim_925x_44c2cf9e-4030-4347-9d4a-f0e4a1479b4a.jpg",
+            "position_top": 48,
+            "position_left": 79,
+            "selected_product": "dark-denim-top"
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_EhxVzm",
+        "hotspot_WrdAjX",
+        "hotspot_qWD7wK",
+        "hotspot_Ea4fKP",
+        "hotspot_eajX36",
+        "hotspot_K46qKF"
+      ],
+      "name": "Custom Hotspot",
+      "settings": {
+        "heading": "Tisso vison in the wild",
+        "heading_color": "#000000",
+        "heading_alignment_desktop": "left",
+        "heading_alignment_mobile": "center",
+        "no_of_items_per_mobile": "2",
+        "items_per_desktop": 3,
+        "desktop_gap": 20,
+        "mobile_gap": 4,
+        "add_extra_product": true,
+        "matched_variants": "M|Black",
+        "extra_product": "dark-winter-jacket",
+        "padding_top_desktop": 90,
+        "padding_bottom_desktop": 90,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     }
   },
   "order": [
     "image_banner",
-    "featured_collection"
+    "featured_collection",
+    "custom_hotspot_z3FmDq",
+    "custom_hero_banner_jMa3Dc",
+    "custom_hotspot_TikC39"
   ]
 }
