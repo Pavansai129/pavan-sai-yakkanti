@@ -3,7 +3,7 @@
   grid-template-areas: "menu logo";
   grid-template-columns: auto 1fr;
   align-items: center;
-  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background: #F7F7F7;
 }
 
@@ -134,9 +134,14 @@
 }
 
 @media screen and (min-width: 990px) {
+  .custom-header {
+    background: #F7F7F7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
   .custom-header__container {
     grid-template-areas: "logo description button";
     grid-template-columns: auto 1fr auto;
+    box-shadow: none;
   }
   .custom-header__button {
     min-width: 207px;
