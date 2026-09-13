@@ -1,0 +1,291 @@
+{{ 'custom-header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-header.js' | asset_url }}" defer></script>
+
+{% assign header_text_color = section.settings.header_text_color %}
+{% assign header_drawer_background_color = section.settings.header_drawer_background_color %}
+{% assign image = section.settings.image %}
+{% assign heading = section.settings.heading %}
+{% assign description = section.settings.description %}
+{% assign button_text = section.settings.button_text %}
+{% assign navigation_url = section.settings.navigation_url %}
+{% assign button_bg = section.settings.button_bg %}
+{% assign button_text_color = section.settings.button_text_color %}
+{% assign button_icon_color = section.settings.button_icon_color %}
+{% assign button_bg_hover = section.settings.button_bg_hover %}
+{% assign button_text_hover = section.settings.button_text_hover %}
+{% assign button_icon_hover = section.settings.button_icon_hover %}
+{% assign padding_top_desktop = section.settings.padding_top_desktop %}
+{% assign padding_bottom_desktop = section.settings.padding_bottom_desktop %}
+{% assign padding_top_mobile = section.settings.padding_top_mobile %}
+{% assign padding_bottom_mobile = section.settings.padding_bottom_mobile %}
+
+{% style %}
+  .custom-header-{{ section.id }} .section-padding-{{ section.id }}{
+    padding-top: {{ padding_top_mobile }}px;
+    padding-bottom: {{ padding_bottom_mobile }}px;
+    color: {{ header_text_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .custom-header-{{ section.id }} .section-padding-{{ section.id }}{
+      padding-top: {{ padding_top_desktop }}px;
+      padding-bottom: {{ padding_bottom_desktop }}px;
+    }
+  }
+
+  .custom-header-{{ section.id }} .custom-header__button {
+    background-color: {{ button_bg }};
+    color: {{ button_text_color }};
+  }
+
+  .custom-header-{{ section.id }} .custom-header__button svg path {
+    fill: {{ button_icon_color }};
+  }
+
+  .custom-header-{{ section.id }} .custom-header__drawer {
+    background: {{ header_drawer_background_color }};
+  }
+
+  .custom-header-{{ section.id }} .custom-header__button::before {
+    background-color: {{ button_bg_hover }};
+  }
+
+  .custom-header-{{ section.id }} .custom-header__button:hover .button-text,
+  .custom-header-{{ section.id }} .custom-header__button:hover svg path {
+    color: {{ button_text_hover }};
+    fill: {{ button_icon_hover }};
+  }
+{% endstyle %}
+
+<div class="custom-header custom-header-{{ section.id }}" data-custom-header>
+  <div class="custom-header__wrapper">
+    <header class="custom-header__container page-width section-padding-{{ section.id }}">
+      <nav class="custom-header__menu large-up-hide" role="navigation">
+        <button class="custom-header__menu-icon" aria-expanded="false" aria-label="Open menu">
+          {% render 'icons', icon_name: 'hamberger' %}
+        </button>
+        <button class="custom-header__close-icon is-hidden hidden" aria-label="Close menu">
+          {% render 'icons', icon_name: 'close-icon' %}
+        </button>
+      </nav>
+
+      {% if image != blank or heading != blank %}
+        <div class="custom-header__logo-container">
+          <h1 class="custom-header-logo">
+            <a href="{{ shop.url }}">
+              {% if image != blank %}
+                <img
+                  src="{{ image | image_url }}"
+                  alt="{{ heading | escape }}"
+                  width="auto"
+                  height="auto"
+                >
+              {% elsif heading != blank %}
+                <span class="h2">{{ heading }}</span>
+              {% endif %}
+            </a>
+          </h1>
+        </div>
+      {% endif %}
+
+      {% if description != blank %}
+        <div class="custom-header__description-container small-hide medium-hide">
+          <p class="custom-header__description">{{ description }}</p>
+        </div>
+      {% endif %}
+
+      {% if button_text != blank %}
+        <div class="custom-header__button-container small-hide medium-hide">
+          <a href="{{ navigation_url | default: '#' }}" aria-label="{{ button_text }}">
+            <button
+              type="button"
+              class="custom-header__button"
+              {% if navigation_url == blank %}
+                disabled
+              {% endif %}
+            >
+              <span class="button-text">{{ button_text }}</span>
+              <span class="custom-header__icon">
+                {% render 'icons', icon_name: 'right-arrow' %}
+              </span>
+            </button>
+          </a>
+        </div>
+      {% endif %}
+    </header>
+
+    <div class="custom-header__drawer large-up-hide">
+      <div class="custom-header__drawer-wrapper">
+        {% if description != blank %}
+          <div class="custom-header__drawer-description">
+            <p>{{ description }}</p>
+          </div>
+        {% endif %}
+        {% if button_text != blank %}
+          <div class="custom-header__drawer-button">
+            <a href="{{ navigation_url | default: '#' }}" aria-label="{{ button_text }}">
+              <button
+                type="button"
+                class="custom-header__button"
+                {% if navigation_url == blank %}
+                  disabled
+                {% endif %}
+              >
+                <span class="button-text">{{ button_text }}</span>
+                <span class="custom-header__icon">
+                  {% render 'icons', icon_name: 'right-arrow' %}
+                </span>
+              </button>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom header",
+  "class": "custom-header-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Logo image",
+      "info": "Recommended 150px × 20px"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (fallback if no logo image)",
+      "default": "My Store"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Your shop tagline or description goes here"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "navigation_url",
+      "label": "Button navigation URL"
+    },
+    {
+      "type": "header",
+      "content": "Color settings"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Header text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "header_drawer_background_color",
+      "label": "Header drawer background color",
+      "default": "#F2F2F2"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#fff544"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_icon_color",
+      "label": "Button icon color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_hover",
+      "label": "Button background hover",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_hover",
+      "label": "Button text hover",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_icon_hover",
+      "label": "Button icon hover",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "Padding top (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "Padding bottom (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 10,
+      "label": "Padding top (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 10,
+      "label": "Padding bottom (Mobile)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom header"
+    }
+  ]
+}
+{% endschema %}

@@ -25,6 +25,7 @@
       "block_order": [
         "announcement-bar-0"
       ],
+      "disabled": true,
       "settings": {
         "auto_rotate": false,
         "change_slides_speed": 5,
@@ -37,6 +38,7 @@
     },
     "header": {
       "type": "header",
+      "disabled": true,
       "settings": {
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
@@ -53,10 +55,34 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "custom_header_tKHaEr": {
+      "type": "custom-header",
+      "name": "Custom header",
+      "settings": {
+        "image": "shopify://shop_images/Header_Logo.png",
+        "heading": "My Store",
+        "description": "Find the ideal gift for your loved ones.",
+        "button_text": "CHOOSE GIFT",
+        "navigation_url": "shopify://collections",
+        "header_text_color": "#000000",
+        "header_drawer_background_color": "#f2f2f2",
+        "button_bg": "#fff544",
+        "button_text_color": "#000000",
+        "button_icon_color": "#000000",
+        "button_bg_hover": "#000000",
+        "button_text_hover": "#f5f5f5",
+        "button_icon_hover": "#f5f5f5",
+        "padding_top_desktop": 23,
+        "padding_bottom_desktop": 23,
+        "padding_top_mobile": 23,
+        "padding_bottom_mobile": 23
+      }
     }
   },
   "order": [
     "announcement-bar",
-    "header"
+    "header",
+    "custom_header_tKHaEr"
   ]
 }

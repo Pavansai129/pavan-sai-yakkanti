@@ -1,0 +1,359 @@
+{% style %}
+  .section-padding-{{section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile}}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile}}px;
+  }
+  .custom-hotspot__products-wrapper{
+     display: grid;
+     grid-template-columns: repeat({{ section.settings.no_of_items_per_mobile }}, 1fr);
+     gap: {{section.settings.mobile_gap}}px;
+  }
+  .custom-hotspot-{{ section.id }} .custom-hotspot-heading {
+    color: {{ section.settings.heading_color }};
+    text-align: {{ section.settings.heading_alignment_mobile }};
+  }
+  @media screen and (min-width: 750px) {
+    .section-padding-{{section.id }} {
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+    .custom-hotspot__products-wrapper{
+      grid-template-columns: repeat({{ section.settings.items_per_desktop }}, 1fr);
+      gap: {{section.settings.desktop_gap}}px;
+   }
+   .custom-hotspot-{{ section.id }} .custom-hotspot-heading {
+      text-align: {{ section.settings.heading_alignment_desktop }};
+    }
+  }
+  {%  if section.blocks.size > 0 %}
+    {%  for block in  section.blocks %}
+      .hotspot-{{ block.id }}{
+        top:calc({{ block.settings.position_top }}% - 22px);
+        left:calc({{ block.settings.position_left }}% - 22px);
+      }
+    {% endfor %}
+  {% endif %}
+{% endstyle %}
+
+{% if section.blocks.size > 0 %}
+  {{ 'custom-hotspot.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'custom-hotspot.js' | asset_url }}" defer></script>
+  <script src="{{ 'custom-product-card.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% if section.settings.add_extra_product %}
+  {% assign variants = section.settings.matched_variants | strip | split: '|' %}
+  {% assign size_variant = variants.first %}
+  {% assign color_variant = variants.last %}
+  {% assign product_id = section.settings.extra_product.selected_or_first_available_variant.id %}
+{% endif %}
+
+<custom-hotspot
+  class="custom-hotspot custom-hotspot-{{ section.id }} section-padding-{{section.id }}"
+  data-size-variant="{{ size_variant }}"
+  data-color-variant="{{ color_variant }}"
+  data-add-on-product-id="{{ product_id }}"
+  data-section-id="{{section.id }}"
+>
+  <div class="custom-hotspot__popup-container hidden">
+    <div class="loading-spinner-container" role="status" aria-live="polite">
+      {%- render 'loading-spinner' -%}
+    </div>
+    <div
+      class="custom-hotspot__popup-wrapper"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="custom-hotspot-heading-{{ section.id }}"
+      tabindex="-1"
+    >
+      <button class="close-button-container" aria-label="Close popup">
+        {% render 'icons', icon_name: 'popup-close-icon' %}
+      </button>
+      <div class="product-card-main-wrapper"></div>
+    </div>
+  </div>
+
+  <div class="custom-hotspot-wrapper page-width">
+    <div class="custom-hotspot__heading-prodcuts-wrapper">
+      {% if section.settings.heading != blank %}
+        <div class="custom-hotspot__heading-wrapper">
+          <h2 class="custom-hotspot-heading" id="custom-hotspot-heading-{{ section.id }}">
+            {{ section.settings.heading }}
+          </h2>
+        </div>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <div class="custom-hotspot__products-wrapper">
+          {% for block in section.blocks %}
+            {% if block.settings.selected_product != blank %}
+              {% assign product_image = block.settings.image
+                | default: block.settings.selected_product.featured_image
+                | default: block.settings.selected_product.selected_or_first_available_variant.featured_image
+              %}
+              <div class="custom-hotspot__product-container">
+                <img
+                  src="{{ product_image | image_url }}"
+                  width="100%"
+                  height="100%"
+                  alt="{{ product_image.alt | default: block.settings.selected_product.title | escape }}"
+                  class="hotspot-image"
+                >
+                <button
+                  class="hotspot-icon-container hotspot-{{ block.id }}"
+                  data-product-handle="{{ block.settings.selected_product.handle }}"
+                  aria-label="View details for {{ block.settings.selected_product.title }}"
+                >
+                  {% render 'icons', icon_name: 'hotspot-icon' %}
+                </button>
+              </div>
+            {% else %}
+              <div class="custom-hotspot__product-container">
+                {{ 'product-1' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</custom-hotspot>
+
+{% schema %}
+{
+  "name": "Custom hotspot",
+  "class": "custom-hostpot",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tisso vison in the wild"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "label": "heading alignment (Dekstop)",
+      "id": "heading_alignment_desktop",
+      "default": "left",
+      "options": [
+        {
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "label": "heading alignment (Mobile)",
+      "id": "heading_alignment_mobile",
+      "default": "left",
+      "options": [
+        {
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "no_of_items_per_mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "One"
+        },
+        {
+          "value": "2",
+          "label": "Two"
+        }
+      ],
+      "default": "2",
+      "label": "No of items per mobile"
+    },
+    {
+      "type": "range",
+      "id": "items_per_desktop",
+      "label": "Items per row (Desktop)",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "desktop_gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Gap between images (Desktop)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Gap between images (Mobile)",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Add on Product"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_extra_product",
+      "label": "Enable Extra Product Add-on",
+      "default": false,
+      "info": "Enable this option to automatically add an extra product when matching variant conditions are met."
+    },
+    {
+      "type": "text",
+      "id": "matched_variants",
+      "label": "Matching Variant Conditions",
+      "default": "M|Black",
+      "info": "Enter variant conditions using format: Size|Color (e.g., M|Black). Use capital/lowercase exactly as in your product variant options."
+    },
+    {
+      "type": "product",
+      "id": "extra_product",
+      "label": "Add on Product",
+      "info": "Select the product that will be added to the cart when a matching variant is detected."
+    },
+    {
+      "type": "header",
+      "content": "Section padding settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Top Padding (Desktop)",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "step": 1,
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Bottom Padding (Desktop)",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "step": 1,
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top Padding (Mobile)",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "step": 1,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom Padding (Mobile)",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "step": 1,
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Hotspot product",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "range",
+          "id": "position_top",
+          "label": "Hotspot Position Top (%)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "position_left",
+          "label": "Hotspot Position Left (%)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50
+        },
+        {
+          "type": "product",
+          "id": "selected_product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Hotspot",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "hotspot"
+        },
+        {
+          "type": "hotspot"
+        },
+        {
+          "type": "hotspot"
+        },
+        {
+          "type": "hotspot"
+        },
+        {
+          "type": "hotspot"
+        },
+        {
+          "type": "hotspot"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
